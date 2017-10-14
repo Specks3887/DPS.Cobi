@@ -1,0 +1,56 @@
+<!--Simple Module for Cobi Michael Diamant -->
+
+<script src="//cdn.jsdelivr.net/raphael/2.1.2/raphael-min.js"></script>
+<script src="//cdn.jsdelivr.net/justgage/1.0.1/justgage.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.cobi.bike/cobi.js/0.34.1/cobi.dev.js"></script>
+
+<body>
+    <!--<input type="button" id="calculate" onClick="funky()" value="calculate"/>-->
+
+    <div id="spd"><b>UStart Cobi Demo and then press SELECT button on controller </b> </div>
+    <div id="gauge" class="200x160px"></div>
+
+    </script>
+
+    <script>
+
+    COBI.hub.externalInterfaceAction.subscribe(function(action) {
+        console.log('I just tapped the handlebar remote and instantly received this ' + action + ' in my Web App');
+        switch (action) {
+            case "RIGHT":
+                  //alert(action)
+            case "LEFT":
+                 //alert(action)
+            case "UP":
+                  //alert(action)
+            case "DOWN":
+                  //alert(action)
+            case "SELECT":
+                  funky();
+                  //alert(action);
+
+        }
+    })
+
+
+
+        function funky() {
+             COBI.rideService.speed.subscribe(function(speed){
+               var spdKMH = speed * 3.6;
+               console.log('Your current speed is ' + spdKMH + 'KM/H');
+              // document.getElementById("spd").innerHTML = speed;
+           g.refresh(spdKMH.toFixed(2));
+             });
+        }
+
+        var g = new JustGage({
+            id: "gauge",
+            value: 0,
+            min: 0,
+            max: 30,
+            title: "Speed KM/H"
+        });
+    </script>
+
+</body>
